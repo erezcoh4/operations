@@ -69,7 +69,7 @@ int main() {
     TH1F *avgwfHist_Yplane_event23 = new TH1F("avgwfHist_Yplane_event23","",9594,-0.5,9593.5);
     TH1F *avgwfHist_Yplane_event32 = new TH1F("avgwfHist_Yplane_event32","",9594,-0.5,9593.5);
     
-    vector<string> filenames { "cathodeHVburstEvent.root" };
+    vector<string> filenames { "/uboone/data/users/ecohen/BurstNoiseCheckEvents/cathodeHVburstEvent.root" };
     
     //InputTag rawdigit_tag { "digitfilter" };
     InputTag rawdigit_tag { "daq" };
