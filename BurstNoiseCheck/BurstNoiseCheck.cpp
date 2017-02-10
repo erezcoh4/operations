@@ -128,84 +128,84 @@ int main() {
                 //                }
                 waveform_wire[event_index][chanNum] -> SetBinContent( k , ADC );
                 
-                //                if (ev.eventAuxiliary().event() == 8) {
-                //                    if (chanNum==1){
-                //                        waveform_wire_1 -> SetBinContent( k , ADC );
-                //                    }
+                //                                if (ev.eventAuxiliary().event() == 8) {
+                //                                    if (chanNum==1){
+                //                                        waveform_wire_1 -> SetBinContent( k , ADC );
+                //                                    }
                 //
-                //                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                //                        avgwfHist_Uplane_event8->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                //                        avgwfHist_Vplane_event8->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                //                        avgwfHist_Yplane_event8->Fill(k, val/700.0);
-                //                    }
-                //                }
-                //                else if (ev.eventAuxiliary().event() == 9) {
-                //                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                //                        avgwfHist_Uplane_event9->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                //                        avgwfHist_Vplane_event9->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                //                        avgwfHist_Yplane_event9->Fill(k, val/700.0);
-                //                    }
-                //                }
-                //                else if (ev.eventAuxiliary().event() == 23) {
-                //                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                //                        avgwfHist_Uplane_event23->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                //                        avgwfHist_Vplane_event23->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                //                        avgwfHist_Yplane_event23->Fill(k, val/700.0);
-                //                    }
-                //                }
-                //                else if (ev.eventAuxiliary().event() == 32) {
-                //                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                //                        avgwfHist_Uplane_event32->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                //                        avgwfHist_Vplane_event32->Fill(k, val/700.0);
-                //                    }
-                //                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                //                        avgwfHist_Yplane_event32->Fill(k, val/700.0);
-                //                    }
-                //                }
-                //            }
-                //
-                //            if (maxVal > 4000) {
-                //                maxNumCounter++;
-                //            }
-                //            
-                //            if (ev.eventAuxiliary().event() == 8) {
-                //                maxvalHist_event8->SetBinContent(chanNum, maxVal);
-                //            }
-                //            else if (ev.eventAuxiliary().event() == 9) {
-                //                maxvalHist_event9->SetBinContent(chanNum, maxVal);
-                //            }
-                //            else if (ev.eventAuxiliary().event() == 23) {
-                //                maxvalHist_event23->SetBinContent(chanNum, maxVal);
-                //            }
-                //            else if (ev.eventAuxiliary().event() == 32) {
-                //                maxvalHist_event32->SetBinContent(chanNum, maxVal);
-                //            }
+                //                                    if ((chanNum > 1000) && (chanNum < 1700)) {
+                //                                        avgwfHist_Uplane_event8->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+                //                                        avgwfHist_Vplane_event8->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+                //                                        avgwfHist_Yplane_event8->Fill(k, val/700.0);
+                //                                    }
+                //                                }
+                //                                else if (ev.eventAuxiliary().event() == 9) {
+                //                                    if ((chanNum > 1000) && (chanNum < 1700)) {
+                //                                        avgwfHist_Uplane_event9->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+                //                                        avgwfHist_Vplane_event9->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+                //                                        avgwfHist_Yplane_event9->Fill(k, val/700.0);
+                //                                    }
+                //                                }
+                //                                else if (ev.eventAuxiliary().event() == 23) {
+                //                                    if ((chanNum > 1000) && (chanNum < 1700)) {
+                //                                        avgwfHist_Uplane_event23->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+                //                                        avgwfHist_Vplane_event23->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+                //                                        avgwfHist_Yplane_event23->Fill(k, val/700.0);
+                //                                    }
+                //                                }
+                //                                else if (ev.eventAuxiliary().event() == 32) {
+                //                                    if ((chanNum > 1000) && (chanNum < 1700)) {
+                //                                        avgwfHist_Uplane_event32->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+                //                                        avgwfHist_Vplane_event32->Fill(k, val/700.0);
+                //                                    }
+                //                                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+                //                                        avgwfHist_Yplane_event32->Fill(k, val/700.0);
+                //                                    }
+                //                                }
             }
-            
-            //        if (maxNumCounter > 100) {
-            //            cout << "CATHODE HV BURST CANDIDATE EVENT" << endl;
-            //        }
-            
-            auto t_end = high_resolution_clock::now();
-            duration<double,std::milli> time_total_ms(t_end-t_begin);
-            cout << "\tEvent took " << time_total_ms.count() << " ms to process." << endl;
+            //
+            //            if (maxVal > 4000) {
+            //                maxNumCounter++;
+            //            }
+            //
+            //            if (ev.eventAuxiliary().event() == 8) {
+            //                maxvalHist_event8->SetBinContent(chanNum, maxVal);
+            //            }
+            //            else if (ev.eventAuxiliary().event() == 9) {
+            //                maxvalHist_event9->SetBinContent(chanNum, maxVal);
+            //            }
+            //            else if (ev.eventAuxiliary().event() == 23) {
+            //                maxvalHist_event23->SetBinContent(chanNum, maxVal);
+            //            }
+            //            else if (ev.eventAuxiliary().event() == 32) {
+            //                maxvalHist_event32->SetBinContent(chanNum, maxVal);
+            //            }
         }
         
-        f_output.Write();
-        f_output.Close();
+        //        if (maxNumCounter > 100) {
+        //            cout << "CATHODE HV BURST CANDIDATE EVENT" << endl;
+        //        }
+        
+        auto t_end = high_resolution_clock::now();
+        duration<double,std::milli> time_total_ms(t_end-t_begin);
+        cout << "\tEvent " << (int)ev.eventAuxiliary().event() << " (" << event_index << ") "<< "processes. it took me " << time_total_ms.count() << " ms to process." << endl;
     }
+    
+    f_output.Write();
+    f_output.Close();
 }
+
