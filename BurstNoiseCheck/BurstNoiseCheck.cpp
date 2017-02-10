@@ -46,7 +46,7 @@ int main() {
     
     // Feb-09
     const int Nwires = 8256 , Ntime = 9594;
-    const int MaxNevents = 15;
+    const int MaxNevents = 30;
     //    std::vector<int> events = {8 , 9 , 23 , 32};
     std::vector<TH1F*> waveform_wire[MaxNevents];
     TH1F * htmp;
@@ -91,7 +91,7 @@ int main() {
         for (size_t i_ar = 0, size_allrawdigits = rawdigit_handle->size(); i_ar != size_allrawdigits; ++i_ar) {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
             int wire = chanNum;
-            if (i_ar%100==0) cout << "processing wire " << wire << endl;
+            if (i_ar%200==0) cout << "processed "<< 100,0*float(i_ar)/rawdigit_handle->size() <<"% of the wires in event " << fevent << "(wire " << wire << ")" << endl;
             waveform_wire[event_index][wire] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)wire));
             waveform_wire[event_index][wire] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)wire));
             
@@ -107,6 +107,7 @@ int main() {
         duration<double,std::milli> time_total_ms(t_end-t_begin);
         cout << "\t run" << frun  << " ( even " << event_index << ") "<< "processes. it took me " << time_total_ms.count() << " ms to process." << endl;
         event_index ++ ;
+        if (event_index>MaxNevents) break;
     }
     
     f_output.Write();
