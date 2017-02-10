@@ -41,12 +41,12 @@ using namespace std::chrono;
 
 int main() {
     
-    TFile f_output("output.root","RECREATE");
+    TFile f_output("/uboone/data/users/ecohen/BurstNoiseCheckEvents/burst_events_study_output.root","RECREATE");
     
     
     // Feb-09
     const int Ntime = 9594;
-    TH1F *waveform_wire_1 = new TH1F("wave-form, wire 1; time ;ADC","",Ntime,-0.5,Ntime-0.5);
+    TH1F *waveform_wire_1 = new TH1F("wf_w1","wave-form, wire 1; time ;ADC",Ntime,-0.5,Ntime-0.5);
     // ----------------------------------------------------------------------------
     
     TH1F *maxvalHist_event8 = new TH1F("maxvalHist_event8","",8256,-0.5,8255.5);
