@@ -51,7 +51,7 @@ int main() {
     std::vector<TH1F*> waveform_wire[4];
     TH1F * htmp;
     for (int i=0 ; i<Nwires ; i++ ){
-        for (int j=0 ; j < Nevnts ; j++){
+        for (int j=0 ; j < Nevents ; j++){
             htmp = new TH1F(Form("h_wf_evnt%d_wire%d",events[j],i),Form("event %d, wire %d wave-form; time ;ADC",events[j],i),Ntime,-0.5,Ntime-0.5);
             waveform_wire[j].push_back(htmp);
         }
@@ -95,7 +95,7 @@ int main() {
         << "Event " << ev.eventAuxiliary().event() << endl;
         
         int event_index = -1;
-        for (int j=0 ; j < Nevnts ; j++){
+        for (int j=0 ; j < Nevents ; j++){
             if (ev.eventAuxiliary().event() == events[j]) {
                 event_index = j;
             }
