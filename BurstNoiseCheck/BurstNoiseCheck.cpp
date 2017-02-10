@@ -92,8 +92,8 @@ int main() {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
             int wire = chanNum;
             if (i_ar%100==0) cout << "processing wire " << wire << endl;
-            waveform_wire[event_index][chanNum] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)wire));
-            waveform_wire[event_index][chanNum] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)wire));
+            waveform_wire[event_index][wire] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)wire));
+            waveform_wire[event_index][wire] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)wire));
             
             // loop over the time ticks
             for (size_t k = 0; k < 9594; k++) {
