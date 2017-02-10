@@ -46,20 +46,22 @@ int main() {
     
     // Feb-09
     const int Nwires = 8256 , Ntime = 9594;
-    const int Nevents = 3;
+    const int Nevents = 10;
     //    std::vector<int> events = {8 , 9 , 23 , 32};
     std::vector<TH1F*> waveform_wire[4];
     TH1F * htmp;
     for (int i=0 ; i<Nwires ; i++ ){
         for (int j=0 ; j < Nevents ; j++){
-            htmp = new TH1F(Form("h_wf_evnt%d_wire%d",j,i),"",Ntime,-0.5,Ntime-0.5);
+            htmp = new TH1F(Form("h_e%d_w%d",j,i),"",Ntime,-0.5,Ntime-0.5);
             waveform_wire[j].push_back(htmp);
         }
     }
     std::cout << "initialized wave-form histograms" << std::endl;
     // ----------------------------------------------------------------------------
     
-    vector<string> filenames { "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00030_20170204T080336_ext_unbiased_20170204T095434_merged_hv_burst_filtered_20170207T1813510.root",
+    vector<string> filenames {
+        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/cathodeHVburstEvent.root",
+        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00030_20170204T080336_ext_unbiased_20170204T095434_merged_hv_burst_filtered_20170207T1813510.root",
     "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00033_20170204T082215_ext_numi_20170204T095414_merged_hv_burst_filtered_20170207T1754210.root",
     "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00097_20170204T104214_mucs_20170204T131409_merged_hv_burst_filtered_20170207T1745000.root"};
     
@@ -88,7 +90,7 @@ int main() {
         // loop over the wires
         for (size_t i_ar = 0, size_allrawdigits = rawdigit_handle->size(); i_ar != size_allrawdigits; ++i_ar) {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
-            cout << "processing wire " << i_ar;
+            if (i_ar%100==0) cout << "processing wire " << i_ar << endl;
             waveform_wire[event_index][chanNum] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)i_ar));
             waveform_wire[event_index][chanNum] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)i_ar));
             
