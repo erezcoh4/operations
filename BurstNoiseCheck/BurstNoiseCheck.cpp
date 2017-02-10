@@ -46,12 +46,12 @@ int main() {
     
     // Feb-09
     const int Nwires = 8256 , Ntime = 9594;
-    const int Nevents = 10;
+    const int MaxNevents = 15;
     //    std::vector<int> events = {8 , 9 , 23 , 32};
-    std::vector<TH1F*> waveform_wire[4];
+    std::vector<TH1F*> waveform_wire[MaxNevents];
     TH1F * htmp;
     for (int i=0 ; i<Nwires ; i++ ){
-        for (int j=0 ; j < Nevents ; j++){
+        for (int j=0 ; j < MaxNevents ; j++){
             htmp = new TH1F(Form("h_e%d_w%d",j,i),"",Ntime,-0.5,Ntime-0.5);
             waveform_wire[j].push_back(htmp);
         }
@@ -76,7 +76,7 @@ int main() {
         cout << "Processing " << "Run " <<  frun << ", " << "Subun " << fsubrun << ", " << "Event " << fevent << endl;
         
         // for originial run 9778 mike gave me
-        //        for (int j=0 ; j < Nevents ; j++){
+        //        for (int j=0 ; j < MaxNevents  ; j++){
         //            if ((int)ev.eventAuxiliary().event() == (int)events[j]) {
         //                event_index = j;
         //            }
