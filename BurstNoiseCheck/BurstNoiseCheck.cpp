@@ -45,8 +45,18 @@ int main() {
     
     
     // Feb-09
-    const int Ntime = 9594;
-    TH1F *waveform_wire_1 = new TH1F("wf_w1","wave-form, wire 1; time ;ADC",Ntime,-0.5,Ntime-0.5);
+    const int Nwires = 8256 , Ntime = 9594;
+    const int Nevents = 4;
+    std::vector<int> events = {8 , 9 , 23 , 32};
+    std::vector<TH1F*> waveform_wire[4];
+    TH1F * htmp;
+    for (int i=0 ; i<Nwires ; i++ ){
+        for (int j=0 ; j < Nevnts ; j++){
+            htmp = new TH1F(Form("h_wf_evnt%d_wire%d",event[j],i),Form("event %d, wire %d wave-form; time ;ADC",event[j],i),Ntime,-0.5,Ntime-0.5);
+            waveform_wire[j].push_back(htmp);
+        }
+    }
+    std::cout << "initialized wave-form histograms" << std::endl;
     // ----------------------------------------------------------------------------
     
     TH1F *maxvalHist_event8 = new TH1F("maxvalHist_event8","",8256,-0.5,8255.5);
@@ -84,7 +94,13 @@ int main() {
         << "Subun " << ev.eventAuxiliary().subRun() << ", "
         << "Event " << ev.eventAuxiliary().event() << endl;
         
-        if (((ev.eventAuxiliary().event() != 8) && (ev.eventAuxiliary().event() != 9) && (ev.eventAuxiliary().event() != 23) && (ev.eventAuxiliary().event() != 32)) || (ev.eventAuxiliary().subRun() != 0)) continue;
+        int event_index = -1;
+        for (int j=0 ; j < Nevnts ; j++){
+            if (ev.eventAuxiliary().event() == events[j]) {
+                event_index = j;
+            }
+        }
+        if (event_index==-1) continue;
         
         auto const& rawdigit_handle = ev.getValidHandle<vector<raw::RawDigit>>(rawdigit_tag);
         auto const& allrawdigits_vec(*rawdigit_handle);
@@ -96,92 +112,93 @@ int main() {
         for (size_t i_ar = 0, size_allrawdigits = rawdigit_handle->size(); i_ar != size_allrawdigits; ++i_ar) {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
             
-            double maxVal = -9999999.0;
+//            double maxVal = -9999999.0;
             //double maxValTime = -9999999.0;
             
             
             
             // loop over the time ticks
             for (size_t k = 0; k < 9594; k++) {
-                double val = allrawdigits_vec.at(i_ar).ADC(k);
-                double ADC = val;
+//                double val = allrawdigits_vec.at(i_ar).ADC(k);
+                double ADC = allrawdigits_vec.at(i_ar).ADC(k);
                 
-                if (fabs(val) > maxVal) {
-                    maxVal = fabs(val);
-                    //maxValTime = k;
-                }
+//                if (fabs(val) > maxVal) {
+//                    maxVal = fabs(val);
+//                    //maxValTime = k;
+//                }
+                waveform_wire[event_index][i] -> SetBinContent( k , ADC );
                 
-                if (ev.eventAuxiliary().event() == 8) {
-                    if (chanNum==1){
-                        waveform_wire_1 -> SetBinContent( k , ADC );
-                    }
-                    
-                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                        avgwfHist_Uplane_event8->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                        avgwfHist_Vplane_event8->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                        avgwfHist_Yplane_event8->Fill(k, val/700.0);
-                    }
-                }
-                else if (ev.eventAuxiliary().event() == 9) {
-                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                        avgwfHist_Uplane_event9->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                        avgwfHist_Vplane_event9->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                        avgwfHist_Yplane_event9->Fill(k, val/700.0);
-                    }
-                }
-                else if (ev.eventAuxiliary().event() == 23) {
-                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                        avgwfHist_Uplane_event23->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                        avgwfHist_Vplane_event23->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                        avgwfHist_Yplane_event23->Fill(k, val/700.0);
-                    }
-                }
-                else if (ev.eventAuxiliary().event() == 32) {
-                    if ((chanNum > 1000) && (chanNum < 1700)) {
-                        avgwfHist_Uplane_event32->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 3200) && (chanNum < 3900)) {
-                        avgwfHist_Vplane_event32->Fill(k, val/700.0);
-                    }
-                    else if ((chanNum > 6000) && (chanNum < 6700)) {
-                        avgwfHist_Yplane_event32->Fill(k, val/700.0);
-                    }
-                }
-            }
-            
-            if (maxVal > 4000) {
-                maxNumCounter++;
-            }
-            
-            if (ev.eventAuxiliary().event() == 8) {
-                maxvalHist_event8->SetBinContent(chanNum, maxVal);
-            }
-            else if (ev.eventAuxiliary().event() == 9) {
-                maxvalHist_event9->SetBinContent(chanNum, maxVal);
-            }
-            else if (ev.eventAuxiliary().event() == 23) {
-                maxvalHist_event23->SetBinContent(chanNum, maxVal);
-            }
-            else if (ev.eventAuxiliary().event() == 32) {
-                maxvalHist_event32->SetBinContent(chanNum, maxVal);
-            }
+//                if (ev.eventAuxiliary().event() == 8) {
+//                    if (chanNum==1){
+//                        waveform_wire_1 -> SetBinContent( k , ADC );
+//                    }
+//                    
+//                    if ((chanNum > 1000) && (chanNum < 1700)) {
+//                        avgwfHist_Uplane_event8->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+//                        avgwfHist_Vplane_event8->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+//                        avgwfHist_Yplane_event8->Fill(k, val/700.0);
+//                    }
+//                }
+//                else if (ev.eventAuxiliary().event() == 9) {
+//                    if ((chanNum > 1000) && (chanNum < 1700)) {
+//                        avgwfHist_Uplane_event9->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+//                        avgwfHist_Vplane_event9->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+//                        avgwfHist_Yplane_event9->Fill(k, val/700.0);
+//                    }
+//                }
+//                else if (ev.eventAuxiliary().event() == 23) {
+//                    if ((chanNum > 1000) && (chanNum < 1700)) {
+//                        avgwfHist_Uplane_event23->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+//                        avgwfHist_Vplane_event23->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+//                        avgwfHist_Yplane_event23->Fill(k, val/700.0);
+//                    }
+//                }
+//                else if (ev.eventAuxiliary().event() == 32) {
+//                    if ((chanNum > 1000) && (chanNum < 1700)) {
+//                        avgwfHist_Uplane_event32->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 3200) && (chanNum < 3900)) {
+//                        avgwfHist_Vplane_event32->Fill(k, val/700.0);
+//                    }
+//                    else if ((chanNum > 6000) && (chanNum < 6700)) {
+//                        avgwfHist_Yplane_event32->Fill(k, val/700.0);
+//                    }
+//                }
+//            }
+//            
+//            if (maxVal > 4000) {
+//                maxNumCounter++;
+//            }
+//            
+//            if (ev.eventAuxiliary().event() == 8) {
+//                maxvalHist_event8->SetBinContent(chanNum, maxVal);
+//            }
+//            else if (ev.eventAuxiliary().event() == 9) {
+//                maxvalHist_event9->SetBinContent(chanNum, maxVal);
+//            }
+//            else if (ev.eventAuxiliary().event() == 23) {
+//                maxvalHist_event23->SetBinContent(chanNum, maxVal);
+//            }
+//            else if (ev.eventAuxiliary().event() == 32) {
+//                maxvalHist_event32->SetBinContent(chanNum, maxVal);
+//            }
         }
         
-        if (maxNumCounter > 100) {
-            cout << "CATHODE HV BURST CANDIDATE EVENT" << endl;
-        }
+//        if (maxNumCounter > 100) {
+//            cout << "CATHODE HV BURST CANDIDATE EVENT" << endl;
+//        }
         
         auto t_end = high_resolution_clock::now();
         duration<double,std::milli> time_total_ms(t_end-t_begin);
