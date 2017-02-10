@@ -52,7 +52,7 @@ int main() {
     TH1F * htmp;
     for (int i=0 ; i<Nwires ; i++ ){
         for (int j=0 ; j < Nevents ; j++){
-            htmp = new TH1F(Form("h_wf_evnt%d_wire%d",events[j],i),"",Ntime,-0.5,Ntime-0.5);
+            htmp = new TH1F(Form("h_wf_evnt%d_wire%d",j,i),"",Ntime,-0.5,Ntime-0.5);
             waveform_wire[j].push_back(htmp);
         }
     }
