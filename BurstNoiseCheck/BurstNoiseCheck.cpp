@@ -40,30 +40,21 @@ using namespace std;
 using namespace std::chrono;
 
 int main() {
+
     
-    const int MaxNevents = 1;//30;
-    TFile f_output("/uboone/data/users/ecohen/BurstNoiseCheckEvents/burst_events_study_output.root","RECREATE");
-    
-    
-    // Feb-09
+    const int MaxNevents = 30;
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
     std::vector<TH1F*> waveform_wire[MaxNevents];
     TH1F * htmp;
-    for (int i=0 ; i<Nwires ; i++ ){
-        for (int j=0 ; j < MaxNevents ; j++){
-            htmp = new TH1F(Form("h_e%d_w%d",j,i),"",Ntime,-0.5,Ntime-0.5);
-            waveform_wire[j].push_back(htmp);
-        }
-    }
-    std::cout << "initialized wave-form histograms" << std::endl;
-    // ----------------------------------------------------------------------------
+    int NeventsFound=0;
+    
     
     vector<string> filenames {
         "/uboone/data/users/ecohen/BurstNoiseCheckEvents/cathodeHVburstEvent.root",
         "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00030_20170204T080336_ext_unbiased_20170204T095434_merged_hv_burst_filtered_20170207T1813510.root",
-    "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00033_20170204T082215_ext_numi_20170204T095414_merged_hv_burst_filtered_20170207T1754210.root",
-    "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00097_20170204T104214_mucs_20170204T131409_merged_hv_burst_filtered_20170207T1745000.root"};
+        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00033_20170204T082215_ext_numi_20170204T095414_merged_hv_burst_filtered_20170207T1754210.root",
+        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00097_20170204T104214_mucs_20170204T131409_merged_hv_burst_filtered_20170207T1745000.root"};
     
     Printf("found the followning R/S/E in events gallary:");
     for (gallery::Event ev(filenames) ; !ev.atEnd(); ev.next()) {
@@ -72,6 +63,23 @@ int main() {
         cout << "run " << frun << " sub " << fsubrun << " event " << fevent << endl ;
     }
     cout << "In total, " << NeventsFound << " events"<< endl;
+    cout << "returning..." << endl;
+    return;
+
+    
+    TFile f_output("/uboone/data/users/ecohen/BurstNoiseCheckEvents/burst_events_study_output.root","RECREATE");
+    
+    
+    // Feb-09
+    for (int i=0 ; i<Nwires ; i++ ){
+        for (int j=0 ; j < MaxNevents ; j++){
+            htmp = new TH1F(Form("h_e%d_w%d",j,i),"",Ntime,-0.5,Ntime-0.5);
+            waveform_wire[j].push_back(htmp);
+        }
+    }
+    std::cout << "initialized wave-form histograms" << std::endl;
+    // ----------------------------------------------------------------------------
+
     
     //InputTag rawdigit_tag { "digitfilter" };
     InputTag rawdigit_tag { "daq" };
