@@ -47,7 +47,7 @@ int main() {
     // Feb-09
     const int Nwires = 8256 , Ntime = 9594;
     const int MaxNevents = 30;
-    //    std::vector<int> events = {8 , 9 , 23 , 32};
+    std::vector<int> events_9778 = {8 , 9 , 23 , 32};
     std::vector<TH1F*> waveform_wire[MaxNevents];
     TH1F * htmp;
     for (int i=0 ; i<Nwires ; i++ ){
@@ -73,6 +73,7 @@ int main() {
     for (gallery::Event ev(filenames) ; !ev.atEnd(); ev.next()) {
         auto t_begin = high_resolution_clock::now();
         int frun = (int)ev.eventAuxiliary().run() , fsubrun = (int)ev.eventAuxiliary().subRun()  , fevent = (int)ev.eventAuxiliary().event();
+        if (frun==9778 && (fevent==events_9778[0] || fevent==events_9778[1] || fevent==events_9778[2] || fevent==events_9778[3])) continue;
         cout << "Processing " << "Run " <<  frun << ", " << "Subun " << fsubrun << ", " << "Event " << fevent << endl;
         
         // for originial run 9778 mike gave me
