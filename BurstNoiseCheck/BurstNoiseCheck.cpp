@@ -64,7 +64,7 @@ int main() {
     }
     cout << "In total, " << NeventsFound << " events"<< endl;
     cout << "returning..." << endl;
-    return;
+    return 0;
 
     
     TFile f_output("/uboone/data/users/ecohen/BurstNoiseCheckEvents/burst_events_study_output.root","RECREATE");
