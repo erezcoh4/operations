@@ -73,7 +73,7 @@ int main() {
     for (gallery::Event ev(filenames) ; !ev.atEnd(); ev.next()) {
         auto t_begin = high_resolution_clock::now();
         int frun = (int)ev.eventAuxiliary().run() , fsubrun = (int)ev.eventAuxiliary().subRun()  , fevent = (int)ev.eventAuxiliary().event();
-        if (frun==9778 && (fevent==events_9778[0] || fevent==events_9778[1] || fevent==events_9778[2] || fevent==events_9778[3])) continue;
+        if (frun==9778 && fevent!=events_9778[0] && fevent!=events_9778[1] && fevent!=events_9778[2] && fevent!=events_9778[3])) continue;
         cout << "Processing " << "Run " <<  frun << ", " << "Subun " << fsubrun << ", " << "Event " << fevent << endl;
         
         // for originial run 9778 mike gave me
@@ -92,7 +92,7 @@ int main() {
         for (size_t i_ar = 0, size_allrawdigits = rawdigit_handle->size(); i_ar != size_allrawdigits; ++i_ar) {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
             int wire = chanNum;
-            if (i_ar%200==0) std::cout << "processed "<< setprecision(0) << (100.0*float(i_ar)/Nwires) << " % of wires in event " << fevent << "(wire " << wire << ")" << endl;
+            if (i_ar%200==0) std::cout << "processed "<< setprecision(1) << (100.0*float(i_ar)/Nwires) << " % of wires in event " << fevent << " (wire " << wire << ")" << endl;
             waveform_wire[event_index][wire] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)wire));
             waveform_wire[event_index][wire] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)wire));
             
@@ -113,5 +113,6 @@ int main() {
     
     f_output.Write();
     f_output.Close();
+    cout << "done." << endl;
 }
 
