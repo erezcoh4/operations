@@ -22,7 +22,6 @@ BurstNoiseCheck: BurstNoiseCheck.cpp
 	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 all: BurstNoiseCheck
-echo making BurstNoiseCheck…
 
 clean:
 	rm *.o BurstNoiseCheck
