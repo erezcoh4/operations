@@ -42,7 +42,7 @@ using namespace std::chrono;
 int main() {
 
     
-    const int MaxNevents = 15;
+    const int MaxNevents = 10;
     Printf ("will process %d events",MaxNevents);
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
