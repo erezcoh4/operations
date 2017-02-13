@@ -81,10 +81,11 @@ int main() {
     
     
     // Feb-09
-    for (int i=0 ; i<Nwires ; i++ ){
-        for (int j=0 ; j < MaxNevents ; j++){
-            htmp = new TH1F(Form("h_e%d_w%d",j,i),"",Ntime,-0.5,Ntime-0.5);
-            waveform_wire[j].push_back(htmp);
+    for (int event_index=0 ; event_index < MaxNevents+1 ; event_index++){
+        for (int i=0 ; i<Nwires ; i++ ){
+            htmp = new TH1F(Form("h_e%d_w%d",event_index,i),"",Ntime,-0.5,Ntime-0.5);
+            waveform_wire[event_index].push_back(htmp);
+            del htmp;
         }
     }
     std::cout << "initialized wave-form histograms" << std::endl;
@@ -97,6 +98,7 @@ int main() {
     int event_index = 0 ;
 
     for (gallery::Event ev(filenames) ; !ev.atEnd(); ev.next()) {
+        if (event_index>MaxNevents) break;
         auto t_begin = high_resolution_clock::now();
         int frun = (int)ev.eventAuxiliary().run() , fsubrun = (int)ev.eventAuxiliary().subRun()  , fevent = (int)ev.eventAuxiliary().event();
         if (frun==9778 && fevent!=events_9778[0] && fevent!=events_9778[1] && fevent!=events_9778[2] && fevent!=events_9778[3]) continue;
@@ -134,7 +136,6 @@ int main() {
         duration<double,std::milli> time_total_ms(t_end-t_begin);
         cout << "\t run" << frun  << " (event " << event_index << ") done. it took me " << time_total_ms.count() << " ms to process." << endl;
         event_index ++ ;
-        if (event_index>MaxNevents) break;
     }
     Printf("writing tree into file...");
     f_output.Write();
