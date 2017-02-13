@@ -1,3 +1,5 @@
+echo making BurstNoiseCheck…
+
 CPPFLAGS=-I $(BOOST_INC) \
          -I $(CANVAS_INC) \
          -I $(CETLIB_INC) \
