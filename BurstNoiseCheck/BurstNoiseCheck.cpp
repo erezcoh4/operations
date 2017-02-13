@@ -42,10 +42,10 @@ using namespace std::chrono;
 int main() {
 
     
-    const int MaxNevents = 30;
+    const int MaxNevents = 1;
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
-    std::vector<TH1F*> waveform_wire[MaxNevents];
+    std::vector<TH1F*> waveform_wire[MaxNevents+1];
     TH1F * htmp;
     int NeventsFound=0;
     
