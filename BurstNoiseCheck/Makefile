@@ -1,5 +1,3 @@
-echo making BurstNoiseCheck…
-
 CPPFLAGS=-I $(BOOST_INC) \
          -I $(CANVAS_INC) \
          -I $(CETLIB_INC) \
@@ -24,6 +22,7 @@ BurstNoiseCheck: BurstNoiseCheck.cpp
 	@$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $<
 
 all: BurstNoiseCheck
+echo making BurstNoiseCheck…
 
 clean:
 	rm *.o BurstNoiseCheck
