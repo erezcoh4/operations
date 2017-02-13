@@ -50,15 +50,20 @@ int main() {
     int NeventsFound=0;
     
     
-    vector<string> filenames {
-        "/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14190416_7/PhysicsRun-2017_2_2_9_38_27-0009854-00084_20170202T201433_bnb_20170202T210500_merged_hv_burst_filtered_20170208T0157480.root" // 7kV burst
-        ,"/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14189948_98/PhysicsRun-2017_2_2_9_38_27-0009854-00021_20170202T221220_bnb_unbiased_20170202T224358_merged_hv_burst_filtered_20170208T0148110.root" // 7kV burst
-        ,"/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14190205_1/PhysicsRun-2017_2_2_9_38_27-0009854-00035_20170202T182854_ext_bnb_20170202T195753_merged_hv_burst_filtered_20170208T0210110.root" // 7kV burst
+    vector<string> filenames;
+    filenames.push_back("/pnfs/uboone/data/uboone/raw/run2_swizzle_trigger_streams/mergeext_unbiased/prod_run2_v05_08_00_03/00/00/99/75/PhysicsRun-2017_2_10_15_7_10-0009975-00008_20170211T081310_ext_unbiased_20170211T170653_merged.root");
+//    for (int i=51;i<53;i++){
+//        filenames.push_back(Form("/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/141899%d_%d/PhysicsRun*.root",))
+//    }
+//    {
+//        "/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14190416_7/PhysicsRun-2017_2_2_9_38_27-0009854-00084_20170202T201433_bnb_20170202T210500_merged_hv_burst_filtered_20170208T0157480.root" // 7kV burst
+//        ,"/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14189948_98/PhysicsRun-2017_2_2_9_38_27-0009854-00021_20170202T221220_bnb_unbiased_20170202T224358_merged_hv_burst_filtered_20170208T0148110.root" // 7kV burst
+//        ,"/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/14190205_1/PhysicsRun-2017_2_2_9_38_27-0009854-00035_20170202T182854_ext_bnb_20170202T195753_merged_hv_burst_filtered_20170208T0210110.root" // 7kV burst
 //        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/cathodeHVburstEvent.root", // -65 kV burst events
 //        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00030_20170204T080336_ext_unbiased_20170204T095434_merged_hv_burst_filtered_20170207T1813510.root",  // 0 kV burst events
 //        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00033_20170204T082215_ext_numi_20170204T095414_merged_hv_burst_filtered_20170207T1754210.root", // 0 kV burst events
 //        "/uboone/data/users/ecohen/BurstNoiseCheckEvents/PhysicsRun-2017_2_3_21_48_5-0009888-00097_20170204T104214_mucs_20170204T131409_merged_hv_burst_filtered_20170207T1745000.root"  // 0 kV burst events
-    };
+//    };
     
     Printf("found the followning R/S/E in events gallary:");
     for (gallery::Event ev(filenames) ; !ev.atEnd(); ev.next()) {
