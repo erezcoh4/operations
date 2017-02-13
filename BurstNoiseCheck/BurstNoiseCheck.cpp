@@ -67,8 +67,8 @@ int main() {
         cout << "run " << frun << " sub " << fsubrun << " event " << fevent << endl ;
     }
     cout << "In total, " << NeventsFound << " events"<< endl;
-    cout << "returning..." << endl;
-    return 0;
+    //    cout << "returning..." << endl;
+    //    return 0;
 
     
     TFile f_output("/uboone/data/users/ecohen/BurstNoiseCheckEvents/burst_events_7kV.root","RECREATE");
