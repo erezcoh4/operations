@@ -85,7 +85,6 @@ int main() {
         for (int i=0 ; i<Nwires ; i++ ){
             htmp = new TH1F(Form("h_e%d_w%d",event_index,i),"",Ntime,-0.5,Ntime-0.5);
             waveform_wire[event_index].push_back(htmp);
-            del htmp;
         }
     }
     std::cout << "initialized wave-form histograms" << std::endl;
