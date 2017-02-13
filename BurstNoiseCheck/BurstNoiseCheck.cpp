@@ -43,6 +43,7 @@ int main() {
 
     
     const int MaxNevents = 1;
+    Printf ("will process %d events",MaxNevents);
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
     std::vector<TH1F*> waveform_wire[MaxNevents+1];
@@ -117,7 +118,7 @@ int main() {
         for (size_t i_ar = 0, size_allrawdigits = rawdigit_handle->size(); i_ar != size_allrawdigits; ++i_ar) {
             int chanNum = allrawdigits_vec.at(i_ar).Channel(); // chanNum matches the wire to the channel number
             int wire = chanNum;
-            if (i_ar%200==0) std::cout << "processed "<< setprecision(2) << (100.0*float(i_ar)/Nwires) << " % of wires in event " << fevent << " (wire " << wire << ")" << endl;
+            if (i_ar%200==0) std::cout << Form("processed %.0f",(100.0*float(i_ar)/Nwires)) << " % of wires in event " << fevent << " (wire " << wire << ")" << endl;
             waveform_wire[event_index][wire] -> SetName(Form("h_wf_r%d_s%d_e%d_wire%d",frun,fsubrun,fevent,(int)wire));
             waveform_wire[event_index][wire] -> SetTitle(Form("r-%d/s-%d/e-%d, wire %d wave-form; time ;ADC",frun,fsubrun,fevent,(int)wire));
             
