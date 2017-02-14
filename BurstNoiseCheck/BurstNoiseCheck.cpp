@@ -42,10 +42,11 @@ using namespace std::chrono;
 int main() {
 
     
-    const int MaxNevents = 10;
+    const int MaxNevents = 15;
     Printf ("will process %d events",MaxNevents);
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
+    std::vector<int> events_9975 = {88 , 89 , 90 , 91 , 92 , 93 , 94 , 95};
     std::vector<TH1F*> waveform_wire[MaxNevents+1];
     TH1F * htmp;
     int NeventsFound=0;
@@ -101,6 +102,11 @@ int main() {
         auto t_begin = high_resolution_clock::now();
         int frun = (int)ev.eventAuxiliary().run() , fsubrun = (int)ev.eventAuxiliary().subRun()  , fevent = (int)ev.eventAuxiliary().event();
         if (frun==9778 && fevent!=events_9778[0] && fevent!=events_9778[1] && fevent!=events_9778[2] && fevent!=events_9778[3]) continue;
+        if (frun==9975
+            && fevent!=events_9975[0] && fevent!=events_9975[1]
+            && fevent!=events_9975[2] && fevent!=events_9975[3]
+            && fevent!=events_9975[4] && fevent!=events_9975[5]
+            && fevent!=events_9975[6] && fevent!=events_9975[7]) continue;
         cout << "Processing " << "Run " <<  frun << ", " << "Subun " << fsubrun << ", " << "Event " << fevent << endl;
         
         // for originial run 9778 mike gave me
@@ -111,6 +117,8 @@ int main() {
         //        }
         //        if (event_index==-1) continue;
         
+        
+       
         auto const& rawdigit_handle = ev.getValidHandle<vector<raw::RawDigit>>(rawdigit_tag);
         auto const& allrawdigits_vec(*rawdigit_handle);
         
