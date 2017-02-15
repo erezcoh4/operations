@@ -47,13 +47,15 @@ int main() {
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
     std::vector<int> events_9975 = {88 , 89 , 90 , 91 , 92 , 93 , 94 , 95};
+    std::vector<int> events_9975 = {20852,20853,20854,20855,20856,20857};
     std::vector<TH1F*> waveform_wire[MaxNevents+1];
     TH1F * htmp;
     int NeventsFound=0;
     
     
     vector<string> filenames;
-    filenames.push_back("/pnfs/uboone/data/uboone/raw/run2_swizzle_trigger_streams/mergeext_unbiased/prod_run2_v05_08_00_03/00/00/99/75/PhysicsRun-2017_2_10_15_7_10-0009975-00008_20170211T081310_ext_unbiased_20170211T170653_merged.root");
+    filenames.push_back("/pnfs/uboone/scratch/users/uboonepro/files_for_erez_feb15/PhysicsRun-2015_12_18_16_21_12-0004172-00417_20170215T212657.root");
+//                        "/pnfs/uboone/data/uboone/raw/run2_swizzle_trigger_streams/mergeext_unbiased/prod_run2_v05_08_00_03/00/00/99/75/PhysicsRun-2017_2_10_15_7_10-0009975-00008_20170211T081310_ext_unbiased_20170211T170653_merged.root");
 //    for (int i=51;i<53;i++){
 //        filenames.push_back(Form("/pnfs/uboone/scratch/users/wketchum/HVBurstFilter/hvburst_7kV/141899%d_%d/PhysicsRun*.root",))
 //    }
