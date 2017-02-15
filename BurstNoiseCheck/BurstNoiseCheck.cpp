@@ -47,7 +47,7 @@ int main() {
     const int Nwires = 8256 , Ntime = 9594;
     std::vector<int> events_9778 = {8 , 9 , 23 , 32};
     std::vector<int> events_9975 = {88 , 89 , 90 , 91 , 92 , 93 , 94 , 95};
-    std::vector<int> events_9975 = {20852,20853,20854,20855,20856,20857};
+    std::vector<int> events_4172 = {20852 , 20853 , 20854 , 20855 , 20856 , 20857};
     std::vector<TH1F*> waveform_wire[MaxNevents+1];
     TH1F * htmp;
     int NeventsFound=0;
@@ -109,6 +109,10 @@ int main() {
             && fevent!=events_9975[2] && fevent!=events_9975[3]
             && fevent!=events_9975[4] && fevent!=events_9975[5]
             && fevent!=events_9975[6] && fevent!=events_9975[7]) continue;
+        if (frun==4172
+            && fevent!=events_4172[0] && fevent!=events_4172[1]
+            && fevent!=events_4172[2] && fevent!=events_4172[3]
+            && fevent!=events_4172[4] && fevent!=events_4172[5] ) continue;
         cout << "Processing " << "Run " <<  frun << ", " << "Subun " << fsubrun << ", " << "Event " << fevent << endl;
         
         // for originial run 9778 mike gave me
